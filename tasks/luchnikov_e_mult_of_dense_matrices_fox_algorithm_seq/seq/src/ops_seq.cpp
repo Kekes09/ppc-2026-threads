@@ -1,6 +1,7 @@
 #include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/seq/include/ops_seq.hpp"
 
 #include <algorithm>
+#include <cmath>
 #include <cstddef>
 
 namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq {
@@ -10,13 +11,13 @@ namespace {
 void FillMatrixWithOnes(DenseMatrix &mat, int n) {
   mat.rows = n;
   mat.cols = n;
-  mat.values.assign(static_cast<std::size_t>(n) * n, 1.0);
+  mat.values.assign((static_cast<std::size_t>(n) * n), 1.0);
 }
 
 void FillMatrixWithZeros(DenseMatrix &mat, int r, int c) {
   mat.rows = r;
   mat.cols = c;
-  mat.values.assign(static_cast<std::size_t>(r) * c, 0.0);
+  mat.values.assign((static_cast<std::size_t>(r) * c), 0.0);
 }
 
 void NaiveMultiply(const DenseMatrix &a, const DenseMatrix &b, DenseMatrix &res) {
@@ -91,7 +92,6 @@ bool LuchnikovEMultOfDenseMatrixFoxAlgoritmSeq::PreProcessingImpl() {
   int n = GetInput();
   FillMatrixWithOnes(matrix_a_, n);
   FillMatrixWithOnes(matrix_b_, n);
-
   block_size_ = DetermineBlockSize(n);
   return true;
 }
