@@ -1,11 +1,11 @@
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_omp/omp/include/ops_omp.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/omp/include/ops_omp.hpp"
 
 #include <omp.h>
 
 #include <algorithm>
 #include <cstddef>
 
-namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_omp {
+namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm {
 
 namespace {
 
@@ -123,4 +123,4 @@ bool LuchnikovEMultOfDenseMatrixFoxAlgoritmOMP::PostProcessingImpl() {
   return std::isfinite(total);
 }
 
-}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_omp
+}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm

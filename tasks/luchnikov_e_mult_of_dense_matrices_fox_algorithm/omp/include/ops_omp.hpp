@@ -1,8 +1,8 @@
 #pragma once
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_omp/common/include/common.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/common/include/common.hpp"
 #include "task/include/task.hpp"
 
-namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_omp {
+namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm {
 
 class LuchnikovEMultOfDenseMatrixFoxAlgoritmOMP : public BaseTask {
  public:
@@ -24,4 +24,4 @@ class LuchnikovEMultOfDenseMatrixFoxAlgoritmOMP : public BaseTask {
   int block_size_ = 32;
 };
 
-}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_omp
+}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm
