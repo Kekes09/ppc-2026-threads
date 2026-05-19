@@ -5,11 +5,11 @@
 #include <cstddef>
 #include <tuple>
 
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/common/include/common.hpp"
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/seq/include/ops_seq.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/common/include/common.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/seq/include/ops_seq.hpp"
 #include "util/include/perf_test_util.hpp"
 
-namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq {
+namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm {
 
 class LuchnikovEMultOfDenseMatrixFoxAlgoritmPerfTestThreads : public ppc::util::BaseRunPerfTests<InType, OutType> {
  protected:
@@ -35,7 +35,7 @@ namespace {
 
 const auto kPerfTaskList =
     std::tuple_cat(ppc::util::MakeAllPerfTasks<InType, LuchnikovEMultOfDenseMatrixFoxAlgoritmSeq>(
-        PPC_SETTINGS_luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq));
+        PPC_SETTINGS_luchnikov_e_mult_of_dense_matrices_fox_algorithm));
 
 const auto kGtestParams = ppc::util::TupleToGTestValues(kPerfTaskList);
 const auto kTestPrinter = LuchnikovEMultOfDenseMatrixFoxAlgoritmPerfTestThreads::CustomPerfTestName;
@@ -44,4 +44,4 @@ INSTANTIATE_TEST_SUITE_P(FoxAlgorithmBenchmark, LuchnikovEMultOfDenseMatrixFoxAl
                          kTestPrinter);
 
 }  // namespace
-}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq
+}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm

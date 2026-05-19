@@ -7,12 +7,12 @@
 #include <string>
 #include <tuple>
 
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/common/include/common.hpp"
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/seq/include/ops_seq.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/common/include/common.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/seq/include/ops_seq.hpp"
 #include "util/include/func_test_util.hpp"
 #include "util/include/util.hpp"
 
-namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq {
+namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm {
 
 class LuchnikovEMultOfDenseMatrixFoxAlgoritmFuncTestsThreads
     : public ppc::util::BaseRunFuncTests<InType, OutType, TestType> {
@@ -65,7 +65,7 @@ const std::array<TestType, 9> kTestCases = {
     std::make_tuple(24, "max_block_coverage")};
 
 const auto kTasks = ppc::util::AddFuncTask<LuchnikovEMultOfDenseMatrixFoxAlgoritmSeq, InType>(
-    kTestCases, PPC_SETTINGS_luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq);
+    kTestCases, PPC_SETTINGS_luchnikov_e_mult_of_dense_matrices_fox_algorithm);
 
 const auto kGtestValues = ppc::util::ExpandToValues(kTasks);
 const auto kPrinter = LuchnikovEMultOfDenseMatrixFoxAlgoritmFuncTestsThreads::PrintFuncTestName<
@@ -75,4 +75,4 @@ INSTANTIATE_TEST_SUITE_P(FoxAlgorithmValidation, LuchnikovEMultOfDenseMatrixFoxA
                          kPrinter);
 
 }  // namespace
-}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq
+}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm

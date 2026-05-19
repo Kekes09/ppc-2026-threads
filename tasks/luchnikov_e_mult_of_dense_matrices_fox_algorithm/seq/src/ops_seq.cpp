@@ -1,10 +1,10 @@
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/seq/include/ops_seq.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/seq/include/ops_seq.hpp"
 
 #include <algorithm>
 #include <cmath>
 #include <cstddef>
 
-namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq {
+namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm {
 
 namespace {
 
@@ -110,4 +110,4 @@ bool LuchnikovEMultOfDenseMatrixFoxAlgoritmSeq::PostProcessingImpl() {
   return std::isfinite(total);
 }
 
-}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq
+}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm
