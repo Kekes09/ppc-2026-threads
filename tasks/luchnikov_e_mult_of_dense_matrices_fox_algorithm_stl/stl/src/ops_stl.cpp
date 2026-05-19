@@ -88,16 +88,16 @@ bool LuchnikovEMultOfDenseMatrixFoxAlgoritmSTL::RunImpl() {
   std::iota(block_indices.begin(), block_indices.end(), 0);
 
   for (int stage = 0; stage < num_blks; ++stage) {
-    std::vector<std::thread> threads;
-    threads.reserve(num_blks);
+    std::vector<std::future<void>> futures;
+    futures.reserve(num_blks);
 
     for (int i : block_indices) {
       FoxRowWorker worker{matrix_a_.data(), matrix_b_.data(), matrix_c_.data(), n, block_size_, stage, num_blks};
-      threads.emplace_back(worker, i);
+      futures.emplace_back(std::async(std::launch::async, worker, i));
     }
 
-    for (auto &t : threads) {
-      t.join();
+    for (auto &f : futures) {
+      f.wait();
     }
   }
   return true;
