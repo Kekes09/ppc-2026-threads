@@ -4,15 +4,15 @@
 #include <string>
 #include <tuple>
 
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/common/include/common.hpp"
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/omp/include/ops_omp.hpp"
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/seq/include/ops_seq.hpp"
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/stl/include/ops_stl.hpp"
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/tbb/include/ops_tbb.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/common/include/common.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/omp/include/ops_omp.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/seq/include/ops_seq.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/stl/include/ops_stl.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/tbb/include/ops_tbb.hpp"
 #include "util/include/func_test_util.hpp"
 #include "util/include/util.hpp"
 
-namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq {
+namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm {
 
 class LuchnikovEMultOfDenseMatrixFoxAlgoritmFuncTests : public ppc::util::BaseRunFuncTests<InType, OutType, TestType> {
  public:
@@ -47,7 +47,6 @@ TEST_P(LuchnikovEMultOfDenseMatrixFoxAlgoritmFuncTests, UnifiedMatrixMultiplicat
 const std::array<TestType, 3> kTestParams = {std::make_tuple(3, "small"), std::make_tuple(5, "medium"),
                                              std::make_tuple(7, "large")};
 
-// Объединяем задачи всех технологий в один кортеж
 const auto kTestTasksList =
     std::tuple_cat(ppc::util::AddFuncTask<LuchnikovEMultOfDenseMatrixFoxAlgoritmSeq, InType>(
                        kTestParams, PPC_SETTINGS_luchnikov_e_mult_of_dense_matrices_fox_algorithm),
@@ -65,4 +64,4 @@ const auto kPerfTestName =
 INSTANTIATE_TEST_SUITE_P(AllTechTests, LuchnikovEMultOfDenseMatrixFoxAlgoritmFuncTests, kGtestValues, kPerfTestName);
 
 }  // namespace
-}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq
+}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm
