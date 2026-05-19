@@ -1,8 +1,8 @@
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq/stl/include/ops_stl.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_stl/stl/include/ops_stl.hpp"
 
 #include <algorithm>
 
-namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq {
+namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_stl {
 
 namespace {
 
@@ -112,4 +112,4 @@ bool LuchnikovEMultOfDenseMatrixFoxAlgoritmSTL::PostProcessingImpl() {
   return true;
 }
 
-}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_seq
+}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_stl
