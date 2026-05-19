@@ -13,13 +13,13 @@ namespace {
 void FillMatrixWithOnes(DenseMatrix &mat, int n) {
   mat.rows = n;
   mat.cols = n;
-  mat.values.assign(static_cast<std::size_t>(n) * n, 1.0);
+  mat.values.assign((static_cast<std::size_t>(n) * n), 1.0);
 }
 
 void FillMatrixWithZeros(DenseMatrix &mat, int r, int c) {
   mat.rows = r;
   mat.cols = c;
-  mat.values.assign(static_cast<std::size_t>(r) * c, 0.0);
+  mat.values.assign((static_cast<std::size_t>(r) * c), 0.0);
 }
 
 void MultiplyBlockSequential(const DenseMatrix &a, const DenseMatrix &b, DenseMatrix &res, int row_off, int col_off,
@@ -62,4 +62,64 @@ int DetermineBlockSize(int n) {
 }
 
 void ExecuteFoxAlgorithmTBB(const DenseMatrix &a, const DenseMatrix &b, DenseMatrix &res, int blk) {
-  if (!a.IsSquare() || !b.IsSquare() || a.rows != b.rows || blk <= 0 || a.rows % blk != 0) 
+  if (!a.IsSquare() || !b.IsSquare() || a.rows != b.rows || blk <= 0 || a.rows % blk != 0) {
+    FillMatrixWithZeros(res, a.rows, b.cols);
+    for (int i = 0; i < a.rows; ++i) {
+      for (int k = 0; k < a.cols; ++k) {
+        double factor = a.At(i, k);
+        if (factor == 0.0) {
+          continue;
+        }
+        for (int j = 0; j < b.cols; ++j) {
+          res.At(i, j) += factor * b.At(k, j);
+        }
+      }
+    }
+    return;
+  }
+
+  int n = a.rows;
+  int stages = n / blk;
+  FillMatrixWithZeros(res, n, n);
+
+  for (int stage = 0; stage < stages; ++stage) {
+    FoxStageBody task{&a, &b, &res, blk, stage, stages};
+    tbb::parallel_for(tbb::blocked_range<int>(0, stages, 1), task);
+  }
+}
+
+}  // namespace
+
+LuchnikovEMultOfDenseMatrixFoxAlgoritmTBB::LuchnikovEMultOfDenseMatrixFoxAlgoritmTBB(const InType &in) {
+  SetTypeOfTask(GetStaticTypeOfTask());
+  GetInput() = in;
+  GetOutput() = 0.0;
+}
+
+bool LuchnikovEMultOfDenseMatrixFoxAlgoritmTBB::ValidationImpl() {
+  return GetInput() > 0 && GetOutput() == 0.0;
+}
+
+bool LuchnikovEMultOfDenseMatrixFoxAlgoritmTBB::PreProcessingImpl() {
+  int n = GetInput();
+  FillMatrixWithOnes(matrix_a_, n);
+  FillMatrixWithOnes(matrix_b_, n);
+  block_size_ = DetermineBlockSize(n);
+  return true;
+}
+
+bool LuchnikovEMultOfDenseMatrixFoxAlgoritmTBB::RunImpl() {
+  ExecuteFoxAlgorithmTBB(matrix_a_, matrix_b_, result_matrix_, block_size_);
+  return true;
+}
+
+bool LuchnikovEMultOfDenseMatrixFoxAlgoritmTBB::PostProcessingImpl() {
+  double total = 0.0;
+  for (double val : result_matrix_.values) {
+    total += val;
+  }
+  GetOutput() = total;
+  return std::isfinite(total);
+}
+
+}  // namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_tbb
