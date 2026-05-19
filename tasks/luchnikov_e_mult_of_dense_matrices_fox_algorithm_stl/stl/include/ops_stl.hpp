@@ -1,5 +1,5 @@
 #pragma once
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_stl/common/include/common.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/common/include/common.hpp"
 #include "task/include/task.hpp"
 
 namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_stl {

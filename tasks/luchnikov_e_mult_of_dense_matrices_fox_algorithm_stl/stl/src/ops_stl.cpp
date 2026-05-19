@@ -1,8 +1,8 @@
-#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_stl/stl/include/ops_stl.hpp"
+#include "luchnikov_e_mult_of_dense_matrices_fox_algorithm/stl/include/ops_stl.hpp"
 
 #include <algorithm>
+#include <future>
 #include <numeric>
-#include <thread>
 #include <vector>
 
 namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_stl {
@@ -30,9 +30,9 @@ struct FoxRowWorker {
         for (int bj = 0; bj < blk; ++bj) {
           int acc = 0;
           for (int bk = 0; bk < blk; ++bk) {
-            acc += a[((row_off + bi) * n) + a_col_shift + bk] * b[((b_row_shift + bk) * n) + col_off + bj];
+            acc += a[(row_off + bi) * n + a_col_shift + bk] * b[(b_row_shift + bk) * n + col_off + bj];
           }
-          c[((row_off + bi) * n) + col_off + bj] += acc;
+          c[(row_off + bi) * n + col_off + bj] += acc;
         }
       }
     }
