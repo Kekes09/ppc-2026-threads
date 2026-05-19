@@ -1,6 +1,9 @@
 #include "luchnikov_e_mult_of_dense_matrices_fox_algorithm_stl/stl/include/ops_stl.hpp"
 
 #include <algorithm>
+#include <numeric>
+#include <thread>
+#include <vector>
 
 namespace luchnikov_e_mult_of_dense_matrices_fox_algorithm_stl {
 
